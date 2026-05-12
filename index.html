@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOLOv8 Project Guide - Sadia Liaqat</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Courier New', monospace; background: #0d1117; color: #c9d1d9; line-height: 1.7; }
+  .header { background: linear-gradient(135deg, #1a1f2e, #0d1117); border-bottom: 1px solid #21262d; padding: 2rem; text-align: center; }
+  .header h1 { font-size: 1.8rem; color: #58a6ff; font-weight: 700; letter-spacing: -0.5px; }
+  .header p { color: #8b949e; margin-top: 0.5rem; font-size: 0.85rem; }
+  .badge { display: inline-block; background: #1f6feb; color: #fff; font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; margin-top: 0.5rem; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .section { margin-bottom: 2.5rem; }
+  .section-title { font-size: 1rem; color: #f0883e; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #21262d; display: flex; align-items: center; gap: 8px; }
+  .section-title span { font-size: 1.1rem; }
+  .step-card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+  .step-num { color: #58a6ff; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.4rem; }
+  .step-desc { color: #c9d1d9; font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .step-desc b { color: #79c0ff; font-family: 'Courier New', monospace; }
+  .code-block { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 1rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.8; white-space: pre-wrap; }
+  .file-tree { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 1rem; font-size: 0.82rem; line-height: 2; white-space: pre-wrap; }
+  .note-box { background: #1f2d1f; border-left: 3px solid #3fb950; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.85rem; color: #adbdad; }
+  .warn-box { background: #2d1f1f; border-left: 3px solid #f85149; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.85rem; color: #c9d1d9; }
+  .cmd-inline { background: #1f242d; color: #3fb950; font-family: 'Courier New', monospace; font-size: 0.82rem; padding: 2px 6px; border-radius: 4px; border: 1px solid #30363d; }
+  .phase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .phase-item { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 0.75rem 1rem; }
+  .phase-week { color: #8b949e; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+  .phase-name { color: #e6edf3; font-size: 0.88rem; font-weight: 600; margin-top: 2px; }
+  .phase-tasks { color: #8b949e; font-size: 0.8rem; margin-top: 4px; }
+  @media (max-width: 600px) {
+    .phase-grid { grid-template-columns: 1fr; }
+    .container { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>YOLOv8 Real-Time Object Detection</h1>
+  <p>Sadia Liaqat | 2025-MS-AI-005 | TUF</p>
+  <div class="badge">Complete VS Code + GitHub + Run Guide</div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="section-title"><span>1.</span> Project Folder Structure</div>
+    <div class="step-card">
+      <div class="step-desc">Project folder ka naam <b>yolov8-object-detection</b> rakhein aur is structure ko follow karein:</div>
+      <div class="file-tree">yolov8-object-detection/
+|- main.py
+|- train.py
+|- evaluate.py
+|- app.py
+|- requirements.txt
+|- README.md
+|- .gitignore
+|- index.html
+|- data/
+|  |- images/.gitkeep
+|  `- labels/.gitkeep
+|- models/.gitkeep
+`- results/.gitkeep</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>2.</span> Requirements</div>
+    <div class="step-card">
+      <div class="step-desc"><b>requirements.txt</b> install karne ke liye:</div>
+      <div class="code-block">pip install -r requirements.txt</div>
+      <div class="note-box">Pehli run par YOLO model download ho sakta hai, is liye internet connection helpful hoga.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>3.</span> Run Commands</div>
+    <div class="step-card">
+      <div class="step-num">Virtual environment</div>
+      <div class="code-block">python -m venv venv
+venv\Scripts\activate</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Webcam detection</div>
+      <div class="code-block">python main.py --mode webcam --model yolov8n.pt --conf 0.5</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Image detection</div>
+      <div class="code-block">python main.py --mode image --source data/images/test.jpg --conf 0.5</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Video detection</div>
+      <div class="code-block">python main.py --mode video --source sample.mp4 --conf 0.5</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Training</div>
+      <div class="code-block">python train.py --data coco128.yaml --epochs 50</div>
+      <div class="warn-box">Custom dataset training ke liye apna YAML path dena hoga. GPU recommended hai.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Evaluation</div>
+      <div class="code-block">python evaluate.py --model yolov8n.pt --data coco128.yaml</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Streamlit app</div>
+      <div class="code-block">streamlit run app.py</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>4.</span> GitHub Upload</div>
+    <div class="step-card">
+      <div class="code-block">git init
+git add .
+git commit -m "Initial commit: YOLOv8 object detection project"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/yolov8-object-detection.git
+git push -u origin main</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>5.</span> Timeline</div>
+    <div class="phase-grid">
+      <div class="phase-item">
+        <div class="phase-week">Week 1-4</div>
+        <div class="phase-name">Literature Review</div>
+        <div class="phase-tasks">Research papers, dataset selection, project planning.</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-week">Week 5-8</div>
+        <div class="phase-name">Data + Setup</div>
+        <div class="phase-tasks">Environment, code scaffold, test runs.</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-week">Week 9-12</div>
+        <div class="phase-name">Training + Evaluation</div>
+        <div class="phase-tasks">Train model, collect mAP/precision/recall results.</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-week">Week 13-16</div>
+        <div class="phase-name">Demo + Report</div>
+        <div class="phase-tasks">Streamlit demo, GitHub polish, final report.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
